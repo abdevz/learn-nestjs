@@ -64,7 +64,33 @@ $ npm run test:cov
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
+Elaboration de l'appi
 
+Les erreurs ou bugs
+--
+1 - ERROR [TypeOrmModule] Unable to connect to the database. Retrying (1)...
+QueryFailedError: Table 'users' already exists
+
+=> Solution : Dans app.modules : passer synchronize en false,
+
+TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'zyadain',
+    password: '14101983',
+    database: 'GCV',
+    entities: [UserEntity],
+    //autoLoadEntities:true,
+    synchronize: false,
+  })
+
+
+
+
+
+---
 ## Stay in touch
 
 - Author - [Zaidi Abdelilah](https://www.linkedin.com/in/abdelilah-zaidi-128178b3/)
