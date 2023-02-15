@@ -27,5 +27,22 @@ export class AuthController {
             
         )
     }
-    
+
+    @Post('login')
+    async login(
+        @Body('email') email:string, 
+        @Body('password') password:string,       
+    ){
+        const user= await this.authService.findOneByEmail(email);
+        console.log('authController',user)
+        if(!user){
+            console.log(user)
+            throw new BadRequestException('Something bad happened with email', { cause: new Error(), description: 'Email does not exist'})
+        }
+
+        if(!await bcrypt.compare(password,user.password)){
+            throw new BadRequestException('Something bad happened with password', { cause: new Error(), description: 'Invalid credentials'})
+        }
+        return  user;        
+    }    
 }
