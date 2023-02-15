@@ -74,6 +74,9 @@ QueryFailedError: Table 'users' already exists
 
 => Solution : Dans app.modules : passer synchronize en false,
 
+
+
+
 TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
@@ -85,6 +88,25 @@ TypeOrmModule.forRoot({
     //autoLoadEntities:true,
     synchronize: false,
   })
+
+
+
+2 - [Nest] 20445 - 25/11/2022 15:54:19 ERROR [ExceptionsHandler] You must provide selection conditions in order to find a single row. Error: You must provide selection conditions in order to find a single row. at EntityManager.findOne (/Users/Nicolas/Desktop/NestJS/nest-auth/src/entity-manager/EntityManager.ts:1094:19) at Repository.findOne
+--Explication : Incompatibilité entre la nouvelle version de typeorm et l'anienne
+
+Solution :
+
+
+
+The problem was that I was using the newer versions of Typeorm (3.1), and the last version of NestJS (9.1.4) and I have read that they dropped support for ormconfig.{json,xml} files. So you need to put your database connection options in a ts or js file using a Data Source and export it.
+
+For me, the solution that work was, downgrade your typeorm to 0.2.45:
+
+npm i typeorm@0.2.45;
+
+the other solution is: Update your code following the new Typeorm docs.
+
+The solution was given by: Luis Vinicius M.
 
 Install validation files
 

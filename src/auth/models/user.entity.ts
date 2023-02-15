@@ -1,4 +1,3 @@
-import { IsString, Length } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
@@ -13,5 +12,5 @@ export class UserEntity{
     email:string;
     
     @Column()
-    password?:string;
+    password:string;
 }
